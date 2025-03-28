@@ -6,17 +6,6 @@ import os
 
 app = FastAPI()
 
-@app.get("/list-dbs/")
-async def list_dbs():
-    return {"databases": await client.list_database_names()}
-
-@app.get("/test-db/")
-async def test_db():
-    docs = []
-    async for doc in collection.find():
-        doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
-        docs.append(doc)
-    return {"data": jsonable_encoder(docs)}
 
 @app.get("/")
 async def read_root():
